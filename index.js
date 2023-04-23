@@ -64,8 +64,8 @@ const structure = async () => {
                     a.tree[item][v].func = await getAnswer('后端提供的接口需要什么大致功能?')
                     a.tree[item][v].howTo = await getAnswer('大概如何实现它呢?')
                     a.tree[item][v].route = `http://${a.host}:${a.port}${await getAnswerDefault('它的api路由是什么?', '/')}`
-                } else {
-                    a.tree[item][v].api = false
+                } else if (await getAnswer(`需要备注吗?(y/n)`) == 'y') {
+                    a.tree[item][v].notes = await getAnswer('请输入你需要给这个功能添加的备注')
                 }
             } else {
                 break
