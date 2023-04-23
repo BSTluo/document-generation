@@ -5,7 +5,7 @@ import path from 'path'
 import { Configuration, OpenAIApi } from 'openai'
 
 const configuration = new Configuration({
-    apiKey: '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'
+    apiKey: '你的gpt的key'
 })
 const openai = new OpenAIApi(configuration)
 
