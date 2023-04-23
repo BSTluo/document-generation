@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "inquirer": "^9.1.5",
+    "openai": "^3.2.1"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-modules index.js",
+    "dev": "node --experimental-modules dev.js"
+  }
+}
