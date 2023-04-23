@@ -63,7 +63,7 @@ const structure = async () => {
                     a.tree[item][v].api = true
                     a.tree[item][v].func = await getAnswer('后端提供的接口需要什么大致功能?')
                     a.tree[item][v].howTo = await getAnswer('大概如何实现它呢?')
-                    a.tree[item][v].route = `http://${a.host}:${a.port}${await getAnswerDefault('它的api路由是什么?','/')}`
+                    a.tree[item][v].route = `http://${a.host}:${a.port}${await getAnswerDefault('它的api路由是什么?', '/')}`
                 } else {
                     a.tree[item][v].api = false
                 }
@@ -84,28 +84,31 @@ const gpt = async () => {
             model: 'gpt-3.5-turbo',
             messages: [
                 {
-                   "role": "user",
-                   "content": `这个是一个我马上要做的项目的项目结构的Json文档，请帮我生成一个项目文档！${JSON.stringify(a, null, 3)}`
+                    "role": "user",
+                    "content": `这个是一个我马上要做的项目的项目结构的Json文档，请帮我生成一个项目文档！${JSON.stringify(a, null, 3)}`
                 }
-             ]
+            ]
         }
-        
-        const completion = await openai.createChatCompletion(gptConfig)
-        let gptReturn = completion.data.choices[0].message.content
-        const filepath = `./data/${a.objname}/object.md`
-        const fileDescriptor = fs.openSync(filepath, 'w');
-        fs.writeSync(fileDescriptor, gptReturn);
-        fs.closeSync(fileDescriptor);
-        console.log(`GPT酱完成了你的活，并且把结果放在了data文件夹下的 [${a.objname}] 文件夹`)
+        try {
+            const completion = await openai.createChatCompletion(gptConfig)
+            let gptReturn = completion.data.choices[0].message.content
+            const filepath = `./data/${a.objname}/object.md`
+            const fileDescriptor = fs.openSync(filepath, 'w');
+            fs.writeSync(fileDescriptor, gptReturn);
+            fs.closeSync(fileDescriptor);
+            console.log(`GPT酱完成了你的活，并且把结果放在了data文件夹下的 [${a.objname}] 文件夹`)
+        } catch (err) {
+            console.log('GPT酱失联了！')
+        }
     } else {
         console.log('GPT酱休息去休息力')
     }
 }
 
 const logicObj = await structure()
-try{
+try {
     fs.mkdirSync(path.join(`./data/${a.objname}`))
-}catch(err){}
+} catch (err) { }
 api.command.update(path.join(`./data/${a.objname}`), 'object', logicObj)
 console.log(`\n\n完成生成啦，请打开data文件夹查看我给你整理在data文件夹内的 [${a.objname}] 文件夹`)
 
