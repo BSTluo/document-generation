@@ -9,3 +9,5 @@ npm run start//启动它
 ![]('./src/json.png')
 ### 生成的Markdown
 ![]('./src/md.png')
+
+### data文件夹内的是示例
