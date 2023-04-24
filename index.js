@@ -42,6 +42,7 @@ const a = {
     tree: {}
 }
 
+
 const structure = async () => {
     a.objname = await getAnswer('你想制作什么?')
     a.host = await getAnswerDefault('你的后端域名是什么?', '127.0.0.1')
