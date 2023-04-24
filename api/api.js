@@ -2,6 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import inquirer from 'inquirer';
 
+/**
+ * 工具函数包
+ */
 export const command = {
   /**
   * 读取一个文件的json对象
@@ -40,10 +43,13 @@ export const command = {
   }
 }
 
+/**
+ * 命令行工具包
+ */
 export const ask = {
   /**
  * 从终端询问一个问题，返回答案
- * @param {问题} questions  
+ * @param {问题} questions(String) 
  * @returns String:答案 
  */
   answer: async (questions) => {
@@ -60,8 +66,8 @@ export const ask = {
 
   /**
   * 从终端询问一个问题，它不填写答案的时候带有默认值
-  * @param {问题} questions 
-  * @param {答案} defValue 
+  * @param {问题} questions(String)
+  * @param {答案} defValue(String)
   * @returns String|默认值:答案
   */
   answerDefault: async (questions, defValue) => {
